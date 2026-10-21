@@ -79,6 +79,22 @@
             50% { box-shadow: 0 0 80px rgba(30, 58, 138, 0.10); }
         }
 
+        @keyframes float3d {
+            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            25% { transform: translateY(-8px) rotateX(1deg) rotateY(1deg); }
+            75% { transform: translateY(8px) rotateX(-1deg) rotateY(-1deg); }
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.4); }
+            70% { box-shadow: 0 0 0 14px rgba(217, 119, 6, 0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -102,7 +118,7 @@
         }
 
         /* ============================================================
-           PARTICLES - BOLINHAS SUTIS (INSTITUCIONAL)
+           PARTICLES
            ============================================================ */
         #particles-canvas {
             position: fixed;
@@ -351,7 +367,7 @@
         }
 
         /* ============================================================
-           HERO - VERSÃO PREFEITURAS
+           HERO
            ============================================================ */
         .hero {
             padding: 80px 0 60px;
@@ -498,12 +514,6 @@
             padding: 24px;
             box-shadow: var(--shadow);
             animation: float3d 6s ease-in-out infinite;
-        }
-
-        @keyframes float3d {
-            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
-            25% { transform: translateY(-8px) rotateX(1deg) rotateY(1deg); }
-            75% { transform: translateY(8px) rotateX(-1deg) rotateY(-1deg); }
         }
 
         .mockup-header {
@@ -848,6 +858,469 @@
             font-size: 0.7rem;
             font-weight: 600;
             color: var(--primary);
+        }
+
+        /* ============================================================
+           FERRAMENTA OCI - DESTAQUE PREMIUM
+           ============================================================ */
+        .oci-section {
+            background: linear-gradient(160deg, #0f1e33 0%, #152c6b 45%, #0f3d3a 100%);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .oci-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .oci-section::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -15%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.08), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: glowPulse 8s ease-in-out infinite;
+        }
+
+        .oci-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .oci-badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 22px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), #b45309);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+            animation: pulseBadge 2.5s ease-in-out infinite;
+        }
+
+        .oci-header {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 60px;
+        }
+
+        .oci-header h2 {
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        .oci-header h2 .gradient-text {
+            background: linear-gradient(135deg, #00d4ff, #8af3e5, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .oci-header p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.8;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* Pílulas de destaque */
+        .oci-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .oci-highlight-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .oci-highlight-pill:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .oci-highlight-pill i {
+            color: #00d4ff;
+            font-size: 1rem;
+        }
+
+        /* Grid de funcionalidades */
+        .oci-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .oci-feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .oci-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #8af3e5, #f59e0b);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .oci-feature-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .oci-feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .oci-feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(245, 158, 11, 0.15));
+            color: #00d4ff;
+            font-size: 26px;
+            transition: all 0.4s ease;
+        }
+
+        .oci-feature-card:hover .oci-feature-icon {
+            transform: scale(1.1) rotate(-4deg);
+            background: linear-gradient(135deg, #00d4ff, #f59e0b);
+            color: white;
+        }
+
+        .oci-feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .oci-feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* Galeria de telas */
+        .oci-gallery-title {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .oci-gallery-title h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .oci-gallery-title h3 .gradient-text {
+            background: linear-gradient(135deg, #00d4ff, #8af3e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .oci-gallery-title p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        .oci-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .oci-screen {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        .oci-screen:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 30px 80px rgba(0, 212, 255, 0.15);
+        }
+
+        .oci-screen-media {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .oci-screen-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .oci-screen:hover .oci-screen-media img {
+            transform: scale(1.04);
+        }
+
+        .oci-screen-media::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(15, 30, 51, 0.8));
+            pointer-events: none;
+        }
+
+        .oci-screen-label {
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .oci-screen-label-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(245, 158, 11, 0.15));
+            color: #00d4ff;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .oci-screen-label div strong {
+            display: block;
+            font-size: 0.95rem;
+            color: white;
+        }
+
+        .oci-screen-label div span {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        /* Bloco de jornada do paciente */
+        .oci-journey {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: 48px 40px;
+            margin-bottom: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        .oci-journey h3 {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .oci-journey h3 .gradient-text {
+            background: linear-gradient(135deg, #00d4ff, #8af3e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .oci-journey > p {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+            max-width: 620px;
+            margin: 0 auto 40px;
+        }
+
+        .journey-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            position: relative;
+        }
+
+        .journey-step {
+            text-align: center;
+            position: relative;
+            padding: 0 8px;
+        }
+
+        .journey-step-number {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, #00d4ff, #f59e0b);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+        }
+
+        .journey-step:not(:last-child) .journey-step-number::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: calc(100% + 16px);
+            height: 2px;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.6), rgba(245, 158, 11, 0.3));
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .journey-step h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+        }
+
+        .journey-step p {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.5;
+        }
+
+        /* CTA final da OCI */
+        .oci-cta {
+            text-align: center;
+            padding: 48px 32px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(245, 158, 11, 0.08));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(10px);
+        }
+
+        .oci-cta h3 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .oci-cta h3 .gradient-text {
+            background: linear-gradient(135deg, #00d4ff, #8af3e5, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .oci-cta p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .oci-cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+        }
+
+        .btn-oci-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #00d4ff, #0ea5e9);
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-oci-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(0, 212, 255, 0.45);
+        }
+
+        .btn-oci-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .btn-oci-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(0, 212, 255, 0.4);
+            transform: translateY(-4px);
         }
 
         /* ============================================================
@@ -1332,6 +1805,16 @@
             .footer-top {
                 grid-template-columns: 1fr 1fr;
             }
+            .oci-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .journey-steps {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+            .journey-step:not(:last-child) .journey-step-number::after {
+                display: none;
+            }
         }
 
         @media (max-width: 860px) {
@@ -1349,12 +1832,19 @@
             .hero-stats .stat h3 {
                 font-size: 1.6rem;
             }
+            .oci-gallery {
+                grid-template-columns: 1fr;
+            }
+            .oci-journey {
+                padding: 32px 24px;
+            }
         }
 
         @media (max-width: 640px) {
             .solutions-grid,
             .projects-grid,
-            .benefits-grid {
+            .benefits-grid,
+            .oci-features {
                 grid-template-columns: 1fr;
             }
             .trust-box {
@@ -1378,6 +1868,15 @@
             .trust-box {
                 padding: 18px 20px;
             }
+            .journey-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .oci-section {
+                padding: 60px 0;
+            }
+            .oci-header h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -1389,7 +1888,7 @@
     <canvas id="particles-canvas"></canvas>
 
     <!-- ============================================================
-    HEADER - VERSÃO PREFEITURAS
+    HEADER
     ============================================================ -->
     <header class="navbar" id="navbar">
         <div class="container">
@@ -1406,6 +1905,7 @@
                 <ul class="nav-links">
                     <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#solucoes">Soluções</a></li>
+                    <li><a href="#oci">Ferramenta OCI</a></li>
                     <li><a href="#projetos">Projetos</a></li>
                     <li><a href="#beneficios">Benefícios</a></li>
                     <li><a href="#contato">Contato</a></li>
@@ -1419,6 +1919,7 @@
             <div class="nav-mobile" id="mobileMenu">
                 <a href="#sobre">Sobre</a>
                 <a href="#solucoes">Soluções</a>
+                <a href="#oci">Ferramenta OCI</a>
                 <a href="#projetos">Projetos</a>
                 <a href="#beneficios">Benefícios</a>
                 <a href="#contato">Contato</a>
@@ -1428,7 +1929,7 @@
     </header>
 
     <!-- ============================================================
-    HERO - VERSÃO PREFEITURAS
+    HERO
     ============================================================ -->
     <section class="hero" id="home">
         <div class="container">
@@ -1451,6 +1952,7 @@
 
                     <div class="hero-actions reveal">
                         <a href="https://wa.me/5531984987116?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20solu%C3%A7%C3%B5es%20para%20prefeituras" class="btn btn-primary btn-glow" target="_blank"><i class="fab fa-whatsapp"></i> Solicitar proposta</a>
+                        <a href="#oci" class="btn btn-accent"><i class="fa-solid fa-star"></i> Conhecer a OCI</a>
                         <a href="#projetos" class="btn btn-secondary"><i class="fa-regular fa-eye"></i> Ver projetos</a>
                     </div>
 
@@ -1632,33 +2134,201 @@
     </section>
 
     <!-- ============================================================
+    FERRAMENTA OCI - PROJETO EM DESTAQUE
+    ============================================================ -->
+    <section class="oci-section" id="oci">
+        <div class="container oci-container">
+            
+            <!-- Badge de destaque -->
+            <div style="text-align: center;">
+                <div class="oci-badge-top">
+                    <i class="fa-solid fa-star"></i> Projeto em Destaque
+                </div>
+            </div>
+
+            <!-- Cabeçalho -->
+            <div class="oci-header reveal">
+                <h2>Conheça a <span class="gradient-text">Ferramenta OCI</span></h2>
+                <p>Acompanhamento completo do paciente — da abertura da OCI até o fechamento, com linha do cuidado integrada e regras de negócio personalizadas.</p>
+            </div>
+
+            <!-- Pílulas de destaque -->
+            <div class="oci-highlights reveal">
+                <div class="oci-highlight-pill">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard Interativo
+                </div>
+                <div class="oci-highlight-pill">
+                    <i class="fa-solid fa-timeline"></i> Timeline de Acompanhamento
+                </div>
+                <div class="oci-highlight-pill">
+                    <i class="fa-solid fa-arrows-spin"></i> Portal do Retorno Integrado
+                </div>
+                <div class="oci-highlight-pill">
+                    <i class="fa-solid fa-route"></i> Linha do Cuidado
+                </div>
+                <div class="oci-highlight-pill">
+                    <i class="fa-solid fa-code-branch"></i> Sincronização por Código
+                </div>
+            </div>
+
+            <!-- Funcionalidades principais -->
+            <div class="oci-features">
+                <div class="oci-feature-card reveal-tilt">
+                    <div class="oci-feature-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3>Dashboard Interativo</h3>
+                    <p>Visualize indicadores em tempo real com gráficos dinâmicos, filtros personalizados e análise completa dos dados da OCI.</p>
+                </div>
+
+                <div class="oci-feature-card reveal-tilt">
+                    <div class="oci-feature-icon">
+                        <i class="fa-solid fa-timeline"></i>
+                    </div>
+                    <h3>Painel de Monitoramento</h3>
+                    <p>Acompanhe o status de cada paciente através de uma timeline visual clara, com todas as etapas do processo.</p>
+                </div>
+
+                <div class="oci-feature-card reveal-tilt">
+                    <div class="oci-feature-icon">
+                        <i class="fa-solid fa-arrows-spin"></i>
+                    </div>
+                    <h3>Portal do Retorno</h3>
+                    <p>Integração total com o código da primeira OCI do paciente, permitindo acompanhar todas as etapas até o fechamento.</p>
+                </div>
+            </div>
+
+            <!-- Jornada do paciente -->
+            <div class="oci-journey reveal">
+                <h3>A <span class="gradient-text">jornada completa</span> do paciente</h3>
+                <p>Da abertura da OCI até o fechamento, cada etapa é registrada e acompanhada conforme as regras de negócio estabelecidas.</p>
+                
+                <div class="journey-steps">
+                    <div class="journey-step">
+                        <div class="journey-step-number">1</div>
+                        <h4>Abertura da OCI</h4>
+                        <p>Registro inicial do paciente no sistema</p>
+                    </div>
+                    <div class="journey-step">
+                        <div class="journey-step-number">2</div>
+                        <h4>Monitoramento</h4>
+                        <p>Acompanhamento em tempo real</p>
+                    </div>
+                    <div class="journey-step">
+                        <div class="journey-step-number">3</div>
+                        <h4>Retorno Integrado</h4>
+                        <p>Sincronização pelo código da OCI</p>
+                    </div>
+                    <div class="journey-step">
+                        <div class="journey-step-number">4</div>
+                        <h4>Linha do Cuidado</h4>
+                        <p>Aplicação das regras de negócio</p>
+                    </div>
+                    <div class="journey-step">
+                        <div class="journey-step-number">5</div>
+                        <h4>Fechamento</h4>
+                        <p>Conclusão com relatório completo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Galeria de telas -->
+            <div class="oci-gallery-title reveal">
+                <h3>Conheça a <span class="gradient-text">interface da ferramenta</span></h3>
+                <p>Telas reais da Ferramenta OCI em funcionamento</p>
+            </div>
+
+            <div class="oci-gallery">
+                <div class="oci-screen reveal-tilt">
+                    <div class="oci-screen-media">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/sistema%20oci%20linha%20do%20cuidado.png" alt="Sistema OCI - Linha do Cuidado">
+                    </div>
+                    <div class="oci-screen-label">
+                        <div class="oci-screen-label-icon">
+                            <i class="fa-solid fa-route"></i>
+                        </div>
+                        <div>
+                            <strong>Linha do Cuidado</strong>
+                            <span>Acompanhamento completo do paciente</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oci-screen reveal-tilt">
+                    <div class="oci-screen-media">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/ferramenta%20com%20deshbords%20interativos.png" alt="Ferramenta com Dashboards Interativos">
+                    </div>
+                    <div class="oci-screen-label">
+                        <div class="oci-screen-label-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <strong>Dashboard Interativo</strong>
+                            <span>Indicadores e gráficos em tempo real</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oci-screen reveal-tilt">
+                    <div class="oci-screen-media">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/portal%20do%20retorno%20integrado%20a%20ferramnta%20oci.png" alt="Portal do Retorno Integrado">
+                    </div>
+                    <div class="oci-screen-label">
+                        <div class="oci-screen-label-icon">
+                            <i class="fa-solid fa-arrows-spin"></i>
+                        </div>
+                        <div>
+                            <strong>Portal do Retorno</strong>
+                            <span>Integração por código da OCI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oci-screen reveal-tilt">
+                    <div class="oci-screen-media">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/portal%20do%20retorno%20integrado%20a%20ferramnta%20oci%202.png" alt="Portal do Retorno Integrado - Detalhes">
+                    </div>
+                    <div class="oci-screen-label">
+                        <div class="oci-screen-label-icon">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        </div>
+                        <div>
+                            <strong>Detalhes do Retorno</strong>
+                            <span>Rastreamento completo das etapas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA final da OCI -->
+            <div class="oci-cta reveal">
+                <h3>Pronto para <span class="gradient-text">transformar o acompanhamento</span> de pacientes?</h3>
+                <p>A Ferramenta OCI foi desenvolvida para trazer eficiência, controle e transparência ao acompanhamento de pacientes na sua gestão pública.</p>
+                <div class="oci-cta-buttons">
+                    <a href="https://wa.me/5531984987116?text=Ol%C3%A1%2C%20gostaria%20de%20conhecer%20a%20Ferramenta%20OCI" class="btn-oci-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Agendar demonstração
+                    </a>
+                    <a href="https://datadeshsolucoes-design.github.io/Painel-OCI/" class="btn-oci-secondary" target="_blank">
+                        <i class="fa-solid fa-external-link-alt"></i> Ver demonstração
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
     PROJETOS PÚBLICOS
     ============================================================ -->
     <section class="section" id="projetos">
         <div class="container">
             <div class="section-header reveal">
                 <div class="section-kicker"><i class="fa-solid fa-diagram-project"></i> Portfólio</div>
-                <h2 class="section-title">Projetos <span>entregues</span></h2>
+                <h2 class="section-title">Outros <span>projetos entregues</span></h2>
                 <p class="section-subtitle">Alguns exemplos de soluções desenvolvidas para o setor público</p>
             </div>
 
             <div class="projects-grid">
-                <!-- Dashboard OCI -->
-                <div class="project-card reveal-tilt">
-                    <div class="project-media">
-                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/deshbord.png" alt="Dashboard OCI">
-                    </div>
-                    <div class="project-content">
-                        <h3>Dashboard OCI</h3>
-                        <p>Painel interativo para acompanhamento de indicadores e tomada de decisão.</p>
-                        <a href="https://datadeshsolucoes-design.github.io/Painel-OCI/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
-                        <div class="project-tags">
-                            <span>Gestão Pública</span>
-                            <span>Dashboard</span>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Painel IBGE -->
                 <div class="project-card reveal-tilt">
                     <div class="project-media">
@@ -1738,6 +2408,22 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Dashboard OCI -->
+                <div class="project-card reveal-tilt">
+                    <div class="project-media">
+                        <img src="https://raw.githubusercontent.com/datadeshsolucoes-design/Servicos-digitais/main/deshbord.png" alt="Dashboard OCI">
+                    </div>
+                    <div class="project-content">
+                        <h3>Dashboard OCI</h3>
+                        <p>Painel interativo para acompanhamento de indicadores e tomada de decisão.</p>
+                        <a href="https://datadeshsolucoes-design.github.io/Painel-OCI/" target="_blank" class="project-link">Ver projeto <i class="fa-solid fa-arrow-right"></i></a>
+                        <div class="project-tags">
+                            <span>Gestão Pública</span>
+                            <span>Dashboard</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1812,6 +2498,7 @@
                     <h4>Links rápidos</h4>
                     <a href="#sobre">Sobre</a>
                     <a href="#solucoes">Soluções</a>
+                    <a href="#oci">Ferramenta OCI</a>
                     <a href="#projetos">Projetos</a>
                     <a href="#beneficios">Benefícios</a>
                     <a href="#contato">Contato</a>
@@ -1879,6 +2566,7 @@
                     <label>Tipo de solução *</label>
                     <select id="tipoServico" required>
                         <option value="">Selecione...</option>
+                        <option value="Ferramenta OCI">⭐ Ferramenta OCI</option>
                         <option value="Dashboard de Gestão">📊 Dashboard de Gestão</option>
                         <option value="Portal da Transparência">🔍 Portal da Transparência</option>
                         <option value="Painel de Indicadores">📈 Painel de Indicadores</option>
@@ -1906,7 +2594,7 @@
     ============================================================ -->
     <script>
         // ============================================================
-        // PARTICLES - VERSÃO INSTITUCIONAL SUTIL
+        // PARTICLES
         // ============================================================
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
